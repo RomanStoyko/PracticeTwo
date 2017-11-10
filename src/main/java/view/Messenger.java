@@ -99,26 +99,4 @@ public class Messenger {
         System.out.println("Enter positive number" );
     }
 
-
-//    /**
-//     * print some text when answer not available
-//     */
-//    private  void printNoResult(){
-//        System.out.println("Входящие данные не соответствуют условиям! Результат неопределен!");
-//        System.out.println("-----------------------------------------------------------------");
-//    }
-
-
-    //    /**
-//     * printing event info
-//     * name - string name of event converted ro upper case
-//     * @param name string name of event converted ro upper case
-//     *
-//     */
-//    public static void printEventInfo(String name){
-//        System.out.println("-----------------------------------");
-//        System.out.println(name.toUpperCase());
-//        System.out.println("Для выхода введите -ext");
-//        System.out.println("-----------------------------------");
-//    }
 }
