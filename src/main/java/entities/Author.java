@@ -64,4 +64,12 @@ public class Author {
         return this.secondName.equals(author.secondName);
 
     }
+
+    @Override
+    public int hashCode() {
+        int result = 18;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + secondName.hashCode();
+        return result;
+    }
 }

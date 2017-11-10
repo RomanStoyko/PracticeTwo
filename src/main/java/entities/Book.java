@@ -74,4 +74,34 @@ public class Book {
     public String toString() {
         return name + " author: " + author.toString() + " г. " + year +  " pub: " + publisher.toString();
     }
+
+    @Override
+    public int hashCode() {
+        int result = 14;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + author.hashCode();
+        result = 31 * result + publisher.hashCode();
+        result = 31 * result + year;
+        result = 31 * result + pages;
+        result = 31 * result + price;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+       if(this == obj){
+           return true;
+       }
+       if(obj == null || this.getClass() != obj.getClass()){
+           return false;
+       }
+       Book book = (Book) obj;
+       if(!this.name.equals(book.name)) return false;
+       if(!this.author.equals(book.author)) return false;
+       if(!this.publisher.equals(book.publisher)) return false;
+       if(this.year != book.year) return false;
+       if(this.pages != book.pages) return false;
+       if(this.price != book.price) return false;
+       return true;
+    }
 }

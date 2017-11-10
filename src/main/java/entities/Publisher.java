@@ -46,4 +46,11 @@ public class Publisher {
         return this.name.equals(publisher.name);
 
     }
+
+    @Override
+    public int hashCode() {
+        int result = 19;
+        result = 31 * result + name.hashCode();
+        return result;
+    }
 }
