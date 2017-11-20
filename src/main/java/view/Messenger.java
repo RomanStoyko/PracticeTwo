@@ -9,26 +9,14 @@ import java.util.List;
  */
 public class Messenger {
 
-    public static void beforGen(){
-        System.out.println("Начата генерация данных");
-    }
-
-    public void afterGen(){
-        System.out.println("Данные подготовленны");
-
-    }
     /**
-     * print main info
+     * printing mwthod for all strings
+     * @param string - some string
      */
-    public void mainInfo(){
-        System.out.println("-----------------------------------");
-        System.out.println("Print all books -prt");
-        System.out.println("Books of author -aut");
-        System.out.println("Books from publisher -pub");
-        System.out.println("Books after year -yea");
-        System.out.println("Sort by publisher -srp");
-        System.out.println("Exit -ext");
+    public void print(String string){
+        System.out.println(string);
     }
+
 
     /**
      * print array
@@ -43,32 +31,9 @@ public class Messenger {
             int num = i + 1;
             System.out.println(num + ". " +  result[i]);
         }
-        System.out.println("-----------------------------------------");
-        printEnterInt();
-        System.out.println("List of items -ite");
-        System.out.println("Exit -ext");
     }
 
-    /**
-     * print array
-     * @param result array
-     */
-    public  void printInputArray(Book[] result){
 
-        for (Book aResult : result) {
-            if (aResult == null) {
-                continue;
-            }
-            System.out.println(aResult);
-        }
-
-    }
-
-    public void printAftreInputArray(){
-        System.out.println("-----------------------------------------");
-        printEnterInt();
-        System.out.println("Exit -ext");
-    }
     /**
      * print arrayList
      * @param result arrayList
@@ -83,20 +48,5 @@ public class Messenger {
         }
     }
 
-    /**
-     * print of error number input
-     */
-    public void printErrorNumberInfo(){
-        System.out.println("Invalid number entered");
-        System.out.println("Exit -ext");
-    }
-
-    /**
-     * print massage about input int
-     *
-     */
-    public  void printEnterInt(){
-        System.out.println("Enter positive number" );
-    }
 
 }

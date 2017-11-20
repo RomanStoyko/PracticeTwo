@@ -1,15 +1,12 @@
 package entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import entities.abstracts.BookList;
 
-public class Author {
+
+public class Author extends BookList {
 
     private String firstName;
     private String secondName;
-
-    private List<Book> bookList = new ArrayList<Book>();
-
 
     public Author() {
     }
@@ -35,34 +32,25 @@ public class Author {
         this.secondName = secondName;
     }
 
-    public List<Book> getBookList() {
-        return bookList;
-    }
-
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
-    }
-
 
     @Override
     public String toString() {
-        return secondName + " " + firstName.charAt(0) +".";
+        return secondName + " " + firstName.charAt(0) + ".";
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj){
+        if (this == obj) {
             return true;
         }
-        if(obj == null || this.getClass() != obj.getClass()){
-            return  false;
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
         }
-        Author author = (Author)obj;
-        if(!this.firstName.equals(author.firstName)){
+        Author author = (Author) obj;
+        if (!this.firstName.equals(author.firstName)) {
             return false;
         }
         return this.secondName.equals(author.secondName);
-
     }
 
     @Override

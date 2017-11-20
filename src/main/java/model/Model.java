@@ -1,9 +1,10 @@
 package model;
 
 import entities.Book;
-import utility.comparators.BookSortByPublisher;
+
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Model {
 
@@ -33,6 +34,12 @@ public class Model {
     }
 
     public void sortByPublisher(Book[] books){
-        Arrays.sort(books,new BookSortByPublisher());
+        Arrays.sort(books, new Comparator<Book>() {
+            public int compare(Book o1, Book o2) {
+                String name1 = o1.getPublisher().getName();
+                String name2 = o2.getPublisher().getName();
+                return name1.compareToIgnoreCase(name2);
+            }
+        });
     }
 }

@@ -1,11 +1,10 @@
 package controller;
 
-
-import entities.Author;
 import entities.Book;
-import entities.Publisher;
+import entities.abstracts.BookList;
 import model.Model;
 import utility.Generator;
+import utility.TextStrings;
 import view.Messenger;
 
 import java.io.BufferedReader;
@@ -14,25 +13,37 @@ import java.io.InputStreamReader;
 
 public class MainController {
 
-    private static final Model MODEL = new Model();
-    private static final Messenger VIEW = new Messenger();
-    private static final Generator BASE = new Generator();
+    private Model model;
+    private Messenger view;
+    private Generator base;
+
+    private TextStrings textStrings;
 
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static String readValue;
 
+    public MainController() {
+    }
+
+    public MainController(Model model, Messenger view, Generator base) {
+        this.model = model;
+        this.view = view;
+        this.base = base;
+    }
+
     public void work() throws IOException {
-        VIEW.afterGen();
-        VIEW.mainInfo();
+        view.print(textStrings.GENERATE_FINISH);
+        view.print(textStrings.SEPARATE_LINE);
+        view.print(textStrings.MENU);
         while ((readValue = reader.readLine()) != null){
             if (readValue.equals("-ext")) {
                 break;
             }else  if (readValue.equals("-prt")) {
                 printAll();
             }else  if (readValue.equals("-aut")) {
-                authorBook();
+                printListBook(base.getAuthors());
             }else  if (readValue.equals("-pub")) {
-                publisherBook();
+                printListBook(base.getPublishers());
             }else  if (readValue.equals("-yea")) {
                 yearBook();
             }else  if (readValue.equals("-srp")) {
@@ -44,105 +55,113 @@ public class MainController {
     }
 
     private void printAll() {
-        VIEW.printInputArray(BASE.getBooks());
-        VIEW.mainInfo();
+        view.printInputArray(base.getBooks());
+        printMainInfo();
     }
 
-    private static void authorBook() throws IOException{
-        VIEW.printInputArray(BASE.getAuthors());
+    private void printListBook(BookList[] inputList) throws IOException{
+        view.printInputArray(inputList);
+        printAftreInputArray();
+        view.print(textStrings.ITEM_LIST);
         while ((readValue = reader.readLine()) != null){
             if(readValue.equals("-ext")) {
-                VIEW.mainInfo();
+                printMainInfo();
                 break;
             }
             if(readValue.equals("-ite")) {
-                VIEW.printInputArray(BASE.getAuthors());
+                view.printInputArray(inputList);
+                printAftreInputArray();
+                view.print(textStrings.ITEM_LIST);
                 continue;
             }
             int number = 0;
             try {
                 number = Integer.parseInt(readValue);
-                Author author = MODEL.getObjFromArray(BASE.getAuthors(), number - 1);
-                if(author == null){
-                    VIEW.printErrorNumberInfo();
-                    VIEW.printEnterInt();
+                BookList bookList = model.getObjFromArray(inputList, number - 1);
+                if(bookList == null){
+                    printErrorNumberInfo();
+                    printEnterInt();
                     continue;
                 }
-                VIEW.printInputArrayList(author.getBookList());
-                VIEW.printEnterInt();
+                view.printInputArrayList(bookList.getBookList());
+                printEnterInt();
 
             } catch (NumberFormatException e) {
 
-                VIEW.printErrorNumberInfo();
-                VIEW.printEnterInt();
+                printErrorNumberInfo();
+                printEnterInt();
             }
         }
 
     }
 
-    private static void publisherBook() throws IOException{
-        VIEW.printInputArray(BASE.getPublishers());
+    private void yearBook() throws IOException {
+       printEnterInt();
         while ((readValue = reader.readLine()) != null){
             if(readValue.equals("-ext")) {
-                VIEW.mainInfo();
-                break;
-            }
-            if(readValue.equals("-ite")) {
-                VIEW.printInputArray(BASE.getPublishers());
-                continue;
-            }
-            int number = 0;
-            try {
-                number = Integer.parseInt(readValue);
-                Publisher publisher = MODEL.getObjFromArray(BASE.getPublishers(), number - 1);
-                if(publisher == null){
-                    VIEW.printErrorNumberInfo();
-                    VIEW.printEnterInt();
-                    continue;
-                }
-                VIEW.printInputArrayList(publisher.getBookList());
-                VIEW.printEnterInt();
-
-            } catch (NumberFormatException e) {
-
-                VIEW.printErrorNumberInfo();
-                VIEW.printEnterInt();
-            }
-        }
-    }
-
-    private static void yearBook() throws IOException {
-        VIEW.printEnterInt();
-        while ((readValue = reader.readLine()) != null){
-            if(readValue.equals("-ext")) {
-                VIEW.mainInfo();
+                printMainInfo();
                 break;
             }
             int number = 0;
             try {
                 number = Integer.parseInt(readValue);
-                Book[] books = MODEL.filterByYear(BASE.getBooks(), number);
+                Book[] books = model.filterByYear(base.getBooks(), number);
                 if(books == null){
-                    VIEW.printErrorNumberInfo();
-                    VIEW.printEnterInt();
+                    printErrorNumberInfo();
+                    printEnterInt();
                     continue;
                 }
-                VIEW.printInputArray(books);
-                VIEW.printAftreInputArray();
+                view.printInputArray(books);
+                printAftreInputArray();
 
             } catch (NumberFormatException e) {
 
-                VIEW.printErrorNumberInfo();
-                VIEW.printEnterInt();
+                printErrorNumberInfo();
+                printEnterInt();
             }
         }
     }
 
-    private static void sortBook() {
-        MODEL.sortByPublisher(BASE.getBooks());
-        VIEW.printInputArray(BASE.getBooks());
-        VIEW.mainInfo();
+    private void sortBook() {
+        model.sortByPublisher(base.getBooks());
+        view.printInputArray(base.getBooks());
+        printMainInfo();
     }
 
+    /**
+     * print main info
+     *
+     */
+    private void printMainInfo(){
+        view.print(textStrings.SEPARATE_LINE);
+        view.print(textStrings.MENU);
+        view.print(textStrings.EXIT);
+    }
 
+    /**
+     * print massage about error
+     *
+     */
+    private void printErrorNumberInfo(){
+        view.print(textStrings.INVALID_NUMBER);
+        view.print(textStrings.EXIT);
+    }
+
+    /**
+     * print massage about input int
+     *
+     */
+    private  void printEnterInt(){
+        view.print(textStrings.INPUT_NUMBER);
+    }
+
+    /**
+     * print massage after print array
+     *
+     */
+    private void printAftreInputArray(){
+        view.print(textStrings.SEPARATE_LINE);
+        printEnterInt();
+        view.print(textStrings.EXIT);
+    }
 }

@@ -1,28 +1,17 @@
 package entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import entities.abstracts.BookList;
 
-public class Publisher {
+
+public class Publisher extends BookList {
     private String name;
-
-    private List<Book> bookList = new ArrayList<Book>();
 
     public Publisher(String name) {
         this.name = name;
     }
 
-    public List<Book> getBookList() {
-        return bookList;
-    }
-
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
-    }
-
     public String getName() {
         return name;
-
     }
 
     public void setName(String name) {
@@ -36,13 +25,13 @@ public class Publisher {
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj){
+        if (this == obj) {
             return true;
         }
-        if(obj == null || this.getClass() != obj.getClass()){
-            return  false;
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
         }
-        Publisher publisher = (Publisher)obj;
+        Publisher publisher = (Publisher) obj;
         return this.name.equals(publisher.name);
 
     }

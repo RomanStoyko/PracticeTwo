@@ -12,8 +12,8 @@ public class Generator {
                                                 "Александр","Артем","Сергей","Дмитрий"};
     private final static String[] SECONDNAME = {"Беседкин","Бусел", "Горностай","Грицай",
                                                  "Максименко", "Мариненко", "Мужиливск", "Онищенко"};
-    private final static String[] BOOKNAME = {
-            "ThomsonReuters",
+    private final static String[] PUBLISHRNAME = {
+            "Thomson Reuters",
             "RELX Group",
             "Wolters Kluwer",
             "Penguin Random House",
@@ -22,7 +22,7 @@ public class Generator {
 
     };
 
-    private final static String[] PUBLISHRNAME = {
+    private final static String[] BOOKNAME = {
             "Things Fall Apart",
             "Fairy tales",
             "The Divine Comedy",
