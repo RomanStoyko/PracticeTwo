@@ -6,6 +6,9 @@ import entities.Publisher;
 
 public class Generator {
 
+
+
+
     private final static int BSIZE = 30;
 
     private final static String[] FIRSTNAME = {"Антон","Орест", "Максим","Евгений",
@@ -154,5 +157,17 @@ public class Generator {
 
     public Publisher[] getPublishers() {
         return publishers;
+    }
+
+    public void setBooks(Book[] books) {
+        this.books = books;
+    }
+
+    public void setAuthors(Author[] authors) {
+        this.authors = authors;
+    }
+
+    public void setPublishers(Publisher[] publishers) {
+        this.publishers = publishers;
     }
 }

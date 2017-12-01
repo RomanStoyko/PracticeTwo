@@ -2,10 +2,11 @@ package entities.abstracts;
 
 import entities.Book;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BookList {
+public abstract class BookList implements Serializable {
     private List<Book> bookList = new ArrayList<Book>();
 
     public List<Book> getBookList() {

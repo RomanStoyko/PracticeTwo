@@ -2,8 +2,12 @@ package entities;
 
 import entities.abstracts.BookList;
 
+import java.io.Serializable;
 
-public class Author extends BookList {
+
+public class Author extends BookList implements Serializable{
+
+    private static final long serialVersionUID = 10L;
 
     private String firstName;
     private String secondName;

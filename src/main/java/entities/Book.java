@@ -1,7 +1,11 @@
 package entities;
 
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable{
+
+    private static final long serialVersionUID = 10L;
 
     private String name;
     private Author author;
